@@ -55,6 +55,13 @@ class GeneratedSeqTests: QuickSpec {
                     expect(newSeq.get(999999)).to(beNil())
                 }
             }
+            context("from array") {
+                let seq = ["asdf", "ubbbbb", 3].generatedSeq()
+                it("works") {
+                    expect(seq[0] as? String) == "asdf"
+                    expect(seq[2] as? Int) == 3
+                }
+            }
         }
     }
 }
