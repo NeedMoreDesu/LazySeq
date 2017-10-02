@@ -34,7 +34,7 @@ class GeneratedSeqTests: QuickSpec {
                 })
                 
                 it("can be used to take first 5 results") {
-                    expect(Array(seq.prefix(5))) == [0, 1, 2, 3, 4]
+                    expect(Array(seq[0..<5])) == [0, 1, 2, 3, 4]
                 }
                 
                 it("can be used to take 12345678910th element") {

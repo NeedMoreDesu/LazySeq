@@ -76,7 +76,9 @@ class LazySeqTests: QuickSpec {
             
             context("infinite generator") {
                 var seq: LazySeq<Int>!
+                var numberOfGenerations = 0
                 seq = LazySeq(count: nil, generate: { (idx, _) -> Int in
+                    numberOfGenerations += 1
                     if idx <= 1 {
                         return 1
                     }
@@ -84,7 +86,19 @@ class LazySeqTests: QuickSpec {
                 })
                 
                 it("generates fibbonaci") {
+                    seq.resetStorage()
+                    numberOfGenerations = 0
                     expect(Array(seq.prefix(10))) == [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+                    expect(numberOfGenerations) == 10
+                }
+                it("use ranges") {
+                    seq.resetStorage()
+                    numberOfGenerations = 0
+                    let newSeq = seq[10..<15].generatedSeq()
+                    expect(newSeq[2]) == 233
+                    expect(numberOfGenerations) == 13
+                    expect(newSeq.allObjects()) == [89, 144, 233, 377, 610]
+                    expect(numberOfGenerations) == 15
                 }
             }
         }

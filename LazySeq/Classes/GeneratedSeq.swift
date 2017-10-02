@@ -7,34 +7,16 @@
 
 import Foundation
 
-open class GeneratedSeq<Type>: Sequence {
-    private let generate: ((Int, ((Any?) -> Type?)?) -> Type?)
+open class GeneratedSeq<Type>: Collection {
+    private let generateFn: ((Int, ((Any?) -> Type?)?) -> Type?)
     private let countFn: (() -> Int)?
-    
-    public var count: Int {
-        get {
-            return countFn?() ?? 0
-        }
-    }
-    
+
+    // MARK:- main functional
     public func get(_ idx: Int, reusingFn: ((Any?) -> Type?)? = nil) -> Type? {
         if countFn == nil || idx < countFn!() {
-            return self.generate(idx, reusingFn)
+            return self.generateFn(idx, reusingFn)
         }
         return nil
-    }
-    
-    public func makeIterator() -> AnyIterator<Type> {
-        var idx = 0
-        return AnyIterator<Type> {
-            let item = self.get(idx)
-            idx = idx + 1
-            return item
-        }
-    }
-    
-    public subscript(idx: Int) -> Type {
-        return get(idx)!
     }
     
     public func map<ReturnType>(_ transform: @escaping (Type) throws -> ReturnType?) rethrows -> GeneratedSeq<ReturnType> {
@@ -54,31 +36,79 @@ open class GeneratedSeq<Type>: Sequence {
     }
     
     public func allObjects() -> [Type] {
-        return Array(self)
+        return Array(self.makeIterator())
+    }
+
+    // MARK:- collection stuff
+    public func index(after i: Int) -> Int {
+        return i+1
+    }
+    public var startIndex: Int = 0
+    public var endIndex: Int {
+        return count
     }
     
-    public init(count: (() -> Int)?, generate: @escaping ((Int, ((Any?) -> Type?)?) -> Type?)) {
-        self.countFn = count
-        self.generate = generate
+    // MARK:- sequence stuff
+    public var count: Int {
+        get {
+            return countFn?() ?? Int.max
+        }
+    }
+
+    public func makeIterator() -> AnyIterator<Type> {
+        var idx = 0
+        return AnyIterator<Type> {
+            let item = self.get(idx)
+            idx = idx + 1
+            return item
+        }
+    }
+    
+    public subscript(idx: Int) -> Type {
+        return get(idx)!
     }
     
     public func first() -> Type? {
         return first(where: { _ in true})
     }
+
+    // MARK:- initializers
+    public init(count: (() -> Int)?, generate: @escaping ((Int, ((Any?) -> Type?)?) -> Type?)) {
+        self.countFn = count
+        self.generateFn = generate
+    }
+    
+    public init(_ array: Array<Type>) {
+        self.countFn = { () -> Int in
+            return array.count
+        }
+        self.generateFn = { (idx, _) -> Element? in
+            return array[idx]
+        }
+    }
     
     public init() {
         self.countFn = { 0 }
-        self.generate = { (_, _) in return nil }
+        self.generateFn = { (_, _) in return nil }
     }
 }
 
 public extension Array where Element: Any {
     func generatedSeq() -> GeneratedSeq<Element> {
-        return GeneratedSeq(count: { () -> Int in
-            self.count
-        }, generate: { (idx, _) -> Element? in
-            self[idx]
-        })
+        return GeneratedSeq(self)
     }
 }
 
+public extension Collection where Element: Any {
+    func generatedSeq() -> GeneratedSeq<Element> {
+        var indexArray: [Self.Index] = []
+        for idx in self.indices {
+            indexArray.append(idx)
+        }
+        return GeneratedSeq(count: { () -> Int in
+            return indexArray.count
+        }) { (idx, _) -> Element in
+            return self[indexArray[idx]]
+        }
+    }
+}
