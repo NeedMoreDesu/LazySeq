@@ -43,7 +43,9 @@ open class GeneratedSeq<Type>: Collection {
     public func index(after i: Int) -> Int {
         return i+1
     }
-    public var startIndex: Int = 0
+    public var startIndex: Int {
+        return 0
+    }
     public var endIndex: Int {
         return count
     }
