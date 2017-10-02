@@ -1,6 +1,7 @@
+# WORK IN PROGRESS
+
 # LazySeq
 
-[![CI Status](http://img.shields.io/travis/Oleksii Horishnii/LazySeq.svg?style=flat)](https://travis-ci.org/Oleksii Horishnii/LazySeq)
 [![Version](https://img.shields.io/cocoapods/v/LazySeq.svg?style=flat)](http://cocoapods.org/pods/LazySeq)
 [![License](https://img.shields.io/cocoapods/l/LazySeq.svg?style=flat)](http://cocoapods.org/pods/LazySeq)
 [![Platform](https://img.shields.io/cocoapods/p/LazySeq.svg?style=flat)](http://cocoapods.org/pods/LazySeq)
