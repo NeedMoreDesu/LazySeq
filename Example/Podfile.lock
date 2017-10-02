@@ -1,22 +1,22 @@
 PODS:
   - LazySeq (0.1.0)
   - Nimble (7.0.2)
-  - Quick (1.0.0)
+  - Quick (1.2.0)
 
 DEPENDENCIES:
   - LazySeq (from `../`)
   - Nimble (~> 7.0.2)
-  - Quick (~> 1.0.0)
+  - Quick (~> 1.2.0)
 
 EXTERNAL SOURCES:
   LazySeq:
     :path: ../
 
 SPEC CHECKSUMS:
-  LazySeq: 510ef927e9b017cf41e28f1e7d505e83c85a7b7b
+  LazySeq: 612156ab191518a76374c91c4ed266d4fb4b366e
   Nimble: bfe1f814edabba69ff145cb1283e04ed636a67f2
-  Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
 
-PODFILE CHECKSUM: b2e43b508b2136baf8ec1129f3c0aefc6ab61a4c
+PODFILE CHECKSUM: fc913d77f988bc4514e036c60bdc46b087db0f2e
 
 COCOAPODS: 1.3.1

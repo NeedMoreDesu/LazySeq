@@ -1,6 +1,4 @@
-# WORK IN PROGRESS
-
-# LazySeq
+# LazySeq & GeneratedSeq
 
 [![Version](https://img.shields.io/cocoapods/v/LazySeq.svg?style=flat)](http://cocoapods.org/pods/LazySeq)
 [![License](https://img.shields.io/cocoapods/l/LazySeq.svg?style=flat)](http://cocoapods.org/pods/LazySeq)
@@ -8,9 +6,9 @@
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+In progress.
 
-## Requirements
+You can check tests section to see how it works
 
 ## Installation
 
