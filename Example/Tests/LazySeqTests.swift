@@ -62,15 +62,37 @@ class LazySeqTests: QuickSpec {
                     expect(seq.allObjects()) == ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
                     expect(numberOfGenerations) == 10
                 }
+            }
+            
+            context("0..7, nil, 9") {
+                var numberOfGenerations = 0
+                let seq = LazySeq(count: { () -> Int in
+                    return 10
+                }) { (idx, _) -> String? in
+                    if idx == 8 {
+                        return nil
+                    }
+                    return "\(idx)"
+                }
                 
                 it("getting all elements stops at nil") {
-                    let newseq = seq.map({ (str) -> String? in
-                        if str == "6" {
-                            return nil
-                        }
-                        return str
-                    })
-                    expect(newseq.allObjects()) == ["0", "1", "2", "3", "4", "5"]
+                    expect(seq.allObjects()) == ["0", "1", "2", "3", "4", "5", "6", "7"]
+                }
+            }
+            
+            context("0..4") {
+                var numberOfGenerations = 0
+                let seq = LazySeq(count: { () -> Int in
+                    return 5
+                }) { (idx, _) -> String? in
+                    if idx == 8 {
+                        return nil
+                    }
+                    return "\(idx)"
+                }
+                
+                it("getting all elements stops at seq.count") {
+                    expect(seq.allObjects()) == ["0", "1", "2", "3", "4"]
                 }
             }
             

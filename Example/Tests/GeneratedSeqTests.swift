@@ -47,13 +47,6 @@ class GeneratedSeqTests: QuickSpec {
                     })
                     expect(newSeq[999999]) == "item999999"
                 }
-
-                it("can be lazily mapped with optional") {
-                    let newSeq = seq.map({ (idx) -> String? in
-                        return nil
-                    })
-                    expect(newSeq.get(999999)).to(beNil())
-                }
             }
             context("from array") {
                 let seq = ["asdf", "ubbbbb", 3].generatedSeq()

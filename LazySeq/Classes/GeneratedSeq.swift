@@ -19,7 +19,7 @@ open class GeneratedSeq<Type>: Collection {
         return nil
     }
     
-    public func map<ReturnType>(_ transform: @escaping (Type) throws -> ReturnType?) rethrows -> GeneratedSeq<ReturnType> {
+    public func map<ReturnType>(_ transform: @escaping (Type) throws -> ReturnType) rethrows -> GeneratedSeq<ReturnType> {
         let newGeneratedSeq = GeneratedSeq<ReturnType>(count: self.countFn, generate: { (idx, _) -> ReturnType? in
             if let item: Type = self.get(idx) {
                 return try! transform(item)
@@ -29,13 +29,11 @@ open class GeneratedSeq<Type>: Collection {
         
         return newGeneratedSeq
     }
-    
-    public func map<ReturnType>(_ transform: @escaping (Type) throws -> ReturnType) rethrows -> GeneratedSeq<ReturnType> {
-        let tr: ((Type) throws -> ReturnType?) = transform
-        return try! self.map(tr)
-    }
-    
+
     public func allObjects() -> [Type] {
+        if let countFn = countFn {
+            return Array(self.makeIterator().prefix(countFn()))
+        }
         return Array(self.makeIterator())
     }
 
