@@ -18,7 +18,7 @@ Lets have a try!
 let seq = GeneratedSeq(count: { () -> Int in
                     return 5
                 }, generate: { (idx, _) -> String? in
-                    if (idx < 5) {
+                    guard (idx < 5) else {
                         return nil
                     }
                     return "item\(idx)"
