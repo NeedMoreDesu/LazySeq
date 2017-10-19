@@ -11,7 +11,8 @@ class GeneratedSeqTests: QuickSpec {
                 let seq = GeneratedSeq(count: { () -> Int in
                     return 5
                 }, generate: { (idx, reuseFn) -> String in
-                    if let reused = reuseFn?(nil) {
+                    if let reuseFn = reuseFn as? (() -> String?),
+                        let reused = reuseFn() {
                         return reused + " is reused with \(idx)"
                     }
                     return "item\(idx)"
@@ -23,7 +24,7 @@ class GeneratedSeqTests: QuickSpec {
                 
                 it("reuses") {
                     let item = seq[0]
-                    expect(seq.get(3, reusingFn: { (_) -> String? in
+                    expect(seq.get(3, context: { () -> String? in
                         return item
                     })) == "item0 is reused with 3"
                 }

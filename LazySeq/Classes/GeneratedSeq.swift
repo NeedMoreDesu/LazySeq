@@ -8,13 +8,13 @@
 import Foundation
 
 open class GeneratedSeq<Type>: Collection {
-    private let generateFn: ((Int, ((Any?) -> Type?)?) -> Type?)
+    private let generateFn: ((Int, Any?) -> Type?)
     private let countFn: (() -> Int)?
 
     // MARK:- main functional
-    public func get(_ idx: Int, reusingFn: ((Any?) -> Type?)? = nil) -> Type? {
+    public func get(_ idx: Int, context: Any? = nil) -> Type? {
         if countFn == nil || idx < countFn!() {
-            return self.generateFn(idx, reusingFn)
+            return self.generateFn(idx, context)
         }
         return nil
     }
@@ -65,6 +65,7 @@ open class GeneratedSeq<Type>: Collection {
     }
     
     public subscript(idx: Int) -> Type {
+        assert(countFn == nil || idx < countFn!(), "index out of range")
         return get(idx)!
     }
     
@@ -73,7 +74,7 @@ open class GeneratedSeq<Type>: Collection {
     }
 
     // MARK:- initializers
-    public init(count: (() -> Int)?, generate: @escaping ((Int, ((Any?) -> Type?)?) -> Type?)) {
+    public init(count: (() -> Int)?, generate: @escaping ((Int, Any?) -> Type?)) {
         self.countFn = count
         self.generateFn = generate
     }

@@ -9,13 +9,13 @@
 import Foundation
 
 open class LazySeq<Type>: GeneratedSeq<Type> {
-    private var storage: [Int: Type?] = [:]
+    public private(set) var storage: [Int: Type?] = [:]
     
-    override public func get(_ idx: Int, reusingFn: ((Any?) -> Type?)? = nil) -> Type? {
+    override public func get(_ idx: Int, context: Any? = nil) -> Type? {
         if let obj = storage[idx] {
             return obj
         }
-        let obj = super.get(idx, reusingFn: reusingFn)
+        let obj = super.get(idx, context: context)
         storage[idx] = obj
         return obj
     }
