@@ -32,15 +32,15 @@ seq.get(0) // Optional("item0")
 seq.get(5) // nil
 ```
 
-##### Why generate returns optional, while non-optional seq is created?
+#### Q: Why generate returns optional, while non-optional seq is created?
 
-Sometimes, you cannot create items beyond some index, but it doesn't mean sequence will be broken, because count function will limit us to non-nil results.
+A: Sometimes, you cannot create items beyond some index, but it doesn't mean sequence will be broken, because count function will limit us to non-nil results.
 
 `.map` function, on the other side, doesn't return optional values on transformation, because you are guaranteed to have the item if the first place, and will never run off-bounds.
 
-##### What is going on in second parameter of generate closure?
+#### Q: What is going on in second parameter of generate closure?
 
-When we get our value with `.get(idx: context:)` function, we can pass anything to the generate function.
+A: When we get our value with `.get(idx: context:)` function, we can pass anything to the generate function.
 
 ```swift
 let seq = GeneratedSeq(count: { () -> Int in
@@ -54,7 +54,7 @@ seq.get(2, [3, 4]) // "item2 with context [3, 4]"
 
 You can pass closures to the context too :)
 
-#### Special olympics
+### Special olympics
 
 Fibonacci!
 
