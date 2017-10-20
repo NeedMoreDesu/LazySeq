@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		067C7EECB39712F9085030BE /* Pods_LazySeq_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD90D0BB0F90BAB30E1EA4FF /* Pods_LazySeq_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -15,8 +14,9 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* GeneratedSeqTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* GeneratedSeqTests.swift */; };
 		80A3331F92EBE4554E1706AF /* Pods_LazySeq_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 210A737F36CF31A5988EFD46 /* Pods_LazySeq_Example.framework */; };
+		A12417971F99797200430F04 /* Pods_LazySeq_Example_LazySeq_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12417981F99797200430F04 /* Pods_LazySeq_Example_LazySeq_Tests.framework */; };
+		A12417991F99797500430F04 /* Pods_LazySeq_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A124179A1F99797500430F04 /* Pods_LazySeq_Example.framework */; };
 		A18B931E1F82B9B4007B8641 /* LazySeqTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18B931D1F82B9B4007B8641 /* LazySeqTests.swift */; };
-		E03C45A028C90506B00F9B95 /* Pods_LazySeq_Example_LazySeq_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DBB218BEF7BD77B2B01191 /* Pods_LazySeq_Example_LazySeq_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +48,8 @@
 		869AACE8AD7B89483C50D580 /* Pods-LazySeq_Example-LazySeq_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazySeq_Example-LazySeq_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LazySeq_Example-LazySeq_Tests/Pods-LazySeq_Example-LazySeq_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8FDBAF304A2BCD2EB5BBF113 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		9E6186847421CE07E710577C /* Pods-LazySeq_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazySeq_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LazySeq_Tests/Pods-LazySeq_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		A12417981F99797200430F04 /* Pods_LazySeq_Example_LazySeq_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_LazySeq_Example_LazySeq_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A124179A1F99797500430F04 /* Pods_LazySeq_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_LazySeq_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A18B931D1F82B9B4007B8641 /* LazySeqTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazySeqTests.swift; sourceTree = "<group>"; };
 		B53D75B3BE55318B4B0CEF4E /* Pods-LazySeq_Example-LazySeq_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazySeq_Example-LazySeq_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LazySeq_Example-LazySeq_Tests/Pods-LazySeq_Example-LazySeq_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC248DE4B6E988840C0987F5 /* LazySeq.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LazySeq.podspec; path = ../LazySeq.podspec; sourceTree = "<group>"; };
@@ -68,8 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				067C7EECB39712F9085030BE /* Pods_LazySeq_Tests.framework in Frameworks */,
-				E03C45A028C90506B00F9B95 /* Pods_LazySeq_Example_LazySeq_Tests.framework in Frameworks */,
+				A12417991F99797500430F04 /* Pods_LazySeq_Example.framework in Frameworks */,
+				A12417971F99797200430F04 /* Pods_LazySeq_Example_LazySeq_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +152,8 @@
 		7E7B821EC1AB67799492064D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A124179A1F99797500430F04 /* Pods_LazySeq_Example.framework */,
+				A12417981F99797200430F04 /* Pods_LazySeq_Example_LazySeq_Tests.framework */,
 				210A737F36CF31A5988EFD46 /* Pods_LazySeq_Example.framework */,
 				CD90D0BB0F90BAB30E1EA4FF /* Pods_LazySeq_Tests.framework */,
 				E1DBB218BEF7BD77B2B01191 /* Pods_LazySeq_Example_LazySeq_Tests.framework */,

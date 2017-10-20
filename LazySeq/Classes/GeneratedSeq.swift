@@ -8,8 +8,8 @@
 import Foundation
 
 open class GeneratedSeq<Type>: Collection {
-    private let generateFn: ((Int, Any?) -> Type?)
-    private let countFn: (() -> Int)?
+    let generateFn: ((Int, Any?) -> Type?)
+    let countFn: (() -> Int)?
 
     // MARK:- main functional
     public func get(_ idx: Int, context: Any? = nil) -> Type? {
@@ -91,6 +91,12 @@ open class GeneratedSeq<Type>: Collection {
     public init() {
         self.countFn = { 0 }
         self.generateFn = { (_, _) in return nil }
+    }
+}
+
+public extension GeneratedSeq {
+    func lazySeq() -> LazySeq<Type> {
+        return LazySeq(count: self.countFn, generate: self.generateFn)
     }
 }
 
