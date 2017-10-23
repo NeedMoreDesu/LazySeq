@@ -100,6 +100,12 @@ public extension GeneratedSeq {
     }
 }
 
+public extension GeneratedSeq {
+    func generatedSeq() -> GeneratedSeq<Type> {
+        return GeneratedSeq(count: self.countFn, generate: self.generateFn)
+    }
+}
+
 public extension Array where Element: Any {
     func generatedSeq() -> GeneratedSeq<Element> {
         return GeneratedSeq(self)

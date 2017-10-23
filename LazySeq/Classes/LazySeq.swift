@@ -64,8 +64,3 @@ open class LazySeq<Type>: GeneratedSeq<Type> {
     }
 }
 
-extension LazySeq {
-    func generatedSeq() -> GeneratedSeq<Type> {
-        return GeneratedSeq(count: self.countFn, generate: self.generateFn)
-    }
-}
