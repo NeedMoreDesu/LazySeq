@@ -29,7 +29,7 @@ open class LazySeq<Type>: GeneratedSeq<Type> {
         }
     }
     
-    public func applyChanges(deletions: [Int], insertions: [Int], updates: [Int], copyFn: ((Type) -> Type?) = { $0 }) {
+    public func applyChanges(deletions: [Int], insertions: [Int], updates: [Int], copyFn: ((Int, Type) -> Type?) = { $1 }) {
         let deletionChanges = deletions.map { (idx) -> DividableRange<Int>.Divider in
             return DividableRange<Int>.Divider(idx: idx, changeRightFn: { (indexDelta) -> Int in
                 return indexDelta - 1
@@ -54,7 +54,7 @@ open class LazySeq<Type>: GeneratedSeq<Type> {
         for (idx, val) in oldStorage {
             if let val = val {
                 let indexDelta = DividableRange<Int>.binarySearch(idx: idx, ranges: ranges)
-                let result = copyFn(val)
+                let result = copyFn(idx, val)
                 newStorage[idx+indexDelta] = result
             }
         }
