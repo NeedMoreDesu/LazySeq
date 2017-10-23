@@ -1,5 +1,7 @@
 PODS:
-  - LazySeq (0.1.0)
+  - DividableRange (0.1.1)
+  - LazySeq (0.4.1):
+    - DividableRange (~> 0.1)
   - Nimble (7.0.2)
   - Quick (1.2.0)
 
@@ -13,7 +15,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  LazySeq: 612156ab191518a76374c91c4ed266d4fb4b366e
+  DividableRange: 1d855fc59a834f36a13f2b1c53cc69f2f0291b04
+  LazySeq: 4173ad7dc892cf44361739978397de4ce426f122
   Nimble: bfe1f814edabba69ff145cb1283e04ed636a67f2
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
 

@@ -123,6 +123,62 @@ class LazySeqTests: QuickSpec {
                     expect(numberOfGenerations) == 15
                 }
             }
+            
+            context("apply changes") {
+                var arr: [Int]!
+                let seq = LazySeq(count: { () -> Int in
+                    return arr.count
+                }) { (idx, _) -> Int? in
+                    return arr[idx]
+                }
+                
+                it("works") {
+                    seq.resetStorage()
+                    arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    expect(seq[3]) == 3
+                    expect(seq[7]) == 7
+                }
+                
+                it("apply delete") {
+                    seq.resetStorage()
+                    arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    expect(seq.allObjects()) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    seq.applyChanges(deletions: [2, 4], insertions: [], updates: [])
+                    let expectedArr = [1, 2, 4, 6, 7, 8, 9, 10]
+                    for idx in 0..<8 {
+                        expect(seq.storage[idx]!) == expectedArr[idx]
+                    }
+                }
+
+                it("apply insertion") {
+                    seq.resetStorage()
+                    arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    expect(seq.allObjects()) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    arr = [1, 9001, 2, 3, 4, 5, 6, 9002, 7, 8, 9, 10]
+                    seq.applyChanges(deletions: [], insertions: [1, 6], updates: [])
+                    expect(seq.storage[2]!) == 2
+                    expect(seq.storage[8]!) == 7
+                    expect(seq.allObjects()) == [1, 9001, 2, 3, 4, 5, 6, 9002, 7, 8, 9, 10]
+                }
+                
+                it("apply update") {
+                    seq.resetStorage()
+                    arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    expect(seq.allObjects()) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    arr = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+                    seq.applyChanges(deletions: [], insertions: [], updates: [1, 4, 6])
+                    expect(seq.allObjects()) == [1, 20, 3, 4, 50, 6, 70, 8, 9, 10]
+                }
+                
+                it("apply alltogether") {
+                    seq.resetStorage()
+                    arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    expect(seq.allObjects()) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    arr = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+                    seq.applyChanges(deletions: [3], insertions: [6], updates: [0, 1, 2])
+                    expect(seq.allObjects()) == [10, 20, 30, 5, 6, 60, 7, 8, 9, 10]
+                }
+            }
         }
     }
 }

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'LazySeq'
-  s.version          = '0.4.1'
+  s.version          = '0.5.0'
   s.summary          = 'Implementation of LazySequence and GeneratedSequence'
 
 # This description is used to generate tags and improve search results.
@@ -40,5 +40,5 @@ It also supports generating using complex reuse function, but it's not required.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'DividableRange', '~> 0.1'
 end

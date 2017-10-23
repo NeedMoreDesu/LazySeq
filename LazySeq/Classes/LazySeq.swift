@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import DividableRange
 
 open class LazySeq<Type>: GeneratedSeq<Type> {
     public private(set) var storage: [Int: Type?] = [:]
@@ -26,6 +27,36 @@ open class LazySeq<Type>: GeneratedSeq<Type> {
         } else {
             self.storage = [:]
         }
+    }
+    
+    public func applyChanges(deletions: [Int], insertions: [Int], updates: [Int]) {
+        let deletionChanges = deletions.map { (idx) -> DividableRange<Int>.Divider in
+            return DividableRange<Int>.Divider(idx: idx, changeRightFn: { (indexDelta) -> Int in
+                return indexDelta - 1
+            })
+        }
+        let insertionChanges = insertions.map { (idx) -> DividableRange<Int>.Divider in
+            return DividableRange<Int>.Divider(idx: idx, changeRightFn: { (indexDelta) -> Int in
+                return indexDelta + 1
+            })
+        }
+        let changes = deletionChanges + insertionChanges
+        let ranges = DividableRange<Int>.rangesFor(baseValue: 0, changes: changes)
+        
+        var oldStorage: [Int: Type?] = self.storage
+        for idx in updates {
+            oldStorage[idx] = nil
+        }
+        for idx in deletions {
+            oldStorage[idx] = nil
+        }
+        var newStorage: [Int: Type?] = [:]
+        for (idx, val) in oldStorage {
+            let indexDelta = DividableRange<Int>.binarySearch(idx: idx, ranges: ranges)
+            newStorage[idx+indexDelta] = val
+        }
+        
+        self.storage = newStorage
     }
 }
 
