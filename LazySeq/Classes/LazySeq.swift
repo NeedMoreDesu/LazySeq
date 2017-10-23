@@ -10,7 +10,7 @@ import Foundation
 import DividableRange
 
 open class LazySeq<Type>: GeneratedSeq<Type> {
-    public var storage: [Int: Type?] = [:]
+    public var storage: [Int: Type] = [:]
     
     override public func get(_ idx: Int, context: Any? = nil) -> Type? {
         if let obj = storage[idx] {
@@ -50,7 +50,7 @@ open class LazySeq<Type>: GeneratedSeq<Type> {
         for idx in deletions {
             oldStorage[idx] = nil
         }
-        var newStorage: [Int: Type?] = [:]
+        var newStorage: [Int: Type] = [:]
         for (idx, val) in oldStorage {
             if let val = val {
                 let indexDelta = DividableRange<Int>.binarySearch(idx: idx, ranges: ranges)

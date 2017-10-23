@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'LazySeq'
-  s.version          = '0.5.4'
+  s.version          = '0.5.5'
   s.summary          = 'Implementation of LazySequence and GeneratedSequence'
 
 # This description is used to generate tags and improve search results.
