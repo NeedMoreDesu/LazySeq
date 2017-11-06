@@ -10,7 +10,7 @@ GeneratedSeq is basically a nice wrapper around closures `countFn` and `generate
 
 LazySeq is subclass of GeneratedSeq that actually saves values to `storage` index->value dictionary (is available for lookup) once they are calculated. Next time lookup occurs, saved value is taken without re-evaluation. To force re-evaluation, you can use `resetStorage` method.
 
-Version 0.6.0 introduces single-value transform, with both no-storage `GeneratedTransform` and stored `LazyTransform` options.
+Version 0.6.1 introduces single-value transform, with both no-storage `GeneratedTransform` and stored `LazyTransform` options.
 
 ## Example
 
