@@ -10,6 +10,8 @@ GeneratedSeq is basically a nice wrapper around closures `countFn` and `generate
 
 LazySeq is subclass of GeneratedSeq that actually saves values to `storage` index->value dictionary (is available for lookup) once they are calculated. Next time lookup occurs, saved value is taken without re-evaluation. To force re-evaluation, you can use `resetStorage` method.
 
+Version 0.6.0 introduces single-value transform, with both no-storage `GeneratedTransform` and stored `LazyTransform` options.
+
 ## Example
 
 Lets have a try!
@@ -53,6 +55,20 @@ seq.get(2, [3, 4]) // "item2 with context [3, 4]"
 ```
 
 You can pass closures to the context too :)
+
+LazyTransform example:
+
+```swift
+var a: [Int] = [1, 2, 3]
+let transform = LazyTransform({ () -> Int in
+    return a.count
+})
+transform.value() // 3
+a = [1, 2, 3, 4]
+transform.value() // 3 (because it's stored, GeneratedTransform would yield 4)
+transform.reset()
+transform.value() // 4
+```
 
 ### Special olympics
 

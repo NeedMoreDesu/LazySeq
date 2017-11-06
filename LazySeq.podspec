@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'LazySeq'
-  s.version          = '0.5.5'
+  s.version          = '0.6.0'
   s.summary          = 'Implementation of LazySequence and GeneratedSequence'
 
 # This description is used to generate tags and improve search results.
@@ -33,7 +33,7 @@ It also supports generating using complex reuse function, but it's not required.
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'LazySeq/Classes/**/*'
-  
+
   # s.resource_bundles = {
   #   'LazySeq' => ['LazySeq/Assets/*.png']
   # }

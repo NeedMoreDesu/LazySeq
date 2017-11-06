@@ -8,6 +8,13 @@
 import Foundation
 
 open class GeneratedSeq<Type>: Collection {
+    public static func ==<Coll>(lhs: GeneratedSeq<Type>, rhs: Coll) -> Bool where Coll: Collection, Coll.Element == Type, Type: Comparable {
+        return equalContents(lhs: lhs, rhs: rhs)
+    }
+    public static func ==<Coll>(lhs: Coll, rhs: GeneratedSeq<Type>) -> Bool where Coll: Collection, Coll.Element == Type, Type: Comparable {
+        return rhs == lhs
+    }
+
     let generateFn: ((Int, Any?) -> Type?)
     let countFn: (() -> Int)?
 
@@ -122,6 +129,28 @@ public extension Collection where Element: Any {
             return indexArray.count
         }) { (idx, _) -> Element in
             return self[indexArray[idx]]
+        }
+    }
+    public static func equalContents<Coll1, Coll2>(lhs: Coll1, rhs: Coll2) -> Bool where Coll1: Collection, Coll2: Collection, Coll2.Element: Comparable, Coll1.Element == Coll2.Element {
+        var rightIndex = rhs.startIndex
+        var leftIndex = lhs.startIndex
+        while true {
+            if leftIndex == lhs.endIndex && rightIndex == rhs.endIndex {
+                return true
+            }
+            if leftIndex == lhs.endIndex {
+                return false
+            }
+            if rightIndex == rhs.endIndex {
+                return false
+            }
+            let leftItem = lhs[leftIndex]
+            leftIndex = lhs.index(after: leftIndex)
+            let rightItem = rhs[rightIndex]
+            rightIndex = rhs.index(after: rightIndex)
+            if (leftItem != rightItem) {
+                return false
+            }
         }
     }
 }

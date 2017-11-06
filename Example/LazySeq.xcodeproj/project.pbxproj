@@ -14,6 +14,7 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* GeneratedSeqTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* GeneratedSeqTests.swift */; };
 		80A3331F92EBE4554E1706AF /* Pods_LazySeq_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 210A737F36CF31A5988EFD46 /* Pods_LazySeq_Example.framework */; };
+		A11E9CD61FB07E5100B919E5 /* LazyTransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E9CD51FB07E5100B919E5 /* LazyTransformTests.swift */; };
 		A12417971F99797200430F04 /* Pods_LazySeq_Example_LazySeq_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12417981F99797200430F04 /* Pods_LazySeq_Example_LazySeq_Tests.framework */; };
 		A12417991F99797500430F04 /* Pods_LazySeq_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A124179A1F99797500430F04 /* Pods_LazySeq_Example.framework */; };
 		A18B931E1F82B9B4007B8641 /* LazySeqTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18B931D1F82B9B4007B8641 /* LazySeqTests.swift */; };
@@ -49,6 +50,7 @@
 		869AACE8AD7B89483C50D580 /* Pods-LazySeq_Example-LazySeq_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazySeq_Example-LazySeq_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LazySeq_Example-LazySeq_Tests/Pods-LazySeq_Example-LazySeq_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8FDBAF304A2BCD2EB5BBF113 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		9E6186847421CE07E710577C /* Pods-LazySeq_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazySeq_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LazySeq_Tests/Pods-LazySeq_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		A11E9CD51FB07E5100B919E5 /* LazyTransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyTransformTests.swift; sourceTree = "<group>"; };
 		A12417981F99797200430F04 /* Pods_LazySeq_Example_LazySeq_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_LazySeq_Example_LazySeq_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A124179A1F99797500430F04 /* Pods_LazySeq_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_LazySeq_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A18B931D1F82B9B4007B8641 /* LazySeqTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazySeqTests.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				607FACEB1AFB9204008FA782 /* GeneratedSeqTests.swift */,
 				A18B931D1F82B9B4007B8641 /* LazySeqTests.swift */,
+				A11E9CD51FB07E5100B919E5 /* LazyTransformTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -408,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACEC1AFB9204008FA782 /* GeneratedSeqTests.swift in Sources */,
+				A11E9CD61FB07E5100B919E5 /* LazyTransformTests.swift in Sources */,
 				A18B931E1F82B9B4007B8641 /* LazySeqTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

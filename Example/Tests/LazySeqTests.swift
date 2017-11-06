@@ -24,7 +24,6 @@ class LazySeqTests: QuickSpec {
                     return "\(idx)"
                 }
                 
-                
                 it("gets item by idx") {
                     expect(seq[5]) == "5"
                 }
@@ -60,6 +59,15 @@ class LazySeqTests: QuickSpec {
                     seq.resetStorage()
                     numberOfGenerations = 0
                     expect(seq.allObjects()) == ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+                    expect(numberOfGenerations) == 10
+                }
+                
+                it("can be used in equality with array") {
+                    seq.resetStorage()
+                    numberOfGenerations = 0
+                    expect(seq == ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]) == true
+                    expect(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"] == seq) == true
+                    expect(["0", "1", "2", "3", "4", "5", "6", "7", "8"] == seq) == false
                     expect(numberOfGenerations) == 10
                 }
             }
