@@ -188,6 +188,27 @@ class LazySeqTests: QuickSpec {
                 }
             }
         }
+        context("shouldStoreCount") {
+            var arr: [Int]!
+            let seq = LazySeq(count: { () -> Int in
+                return arr.count
+            }) { (idx, _) -> Int? in
+                return arr[idx]
+            }
+            seq.shouldStoreCount = true
+            
+            it("works") {
+                seq.resetStorage()
+                arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                expect(seq.count) == 10
+                arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                expect(seq.count) == 10
+                expect(seq.get(10)).to(beNil())
+                seq.resetStorage()
+                expect(seq.count) == 12
+                expect(seq.get(10)).to(be(10))
+            }
+        }
         describe("2d") {
             var arr = [[1, 2, 3], [4, 5], [6], [7, 8, 9]]
             let seq = LazySeq(count: { () -> Int in

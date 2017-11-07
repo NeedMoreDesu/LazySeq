@@ -11,6 +11,8 @@ import DividableRange
 
 open class LazySeq<Type>: GeneratedSeq<Type> {
     public var storage: [Int: Type] = [:]
+    public var shouldStoreCount: Bool = false
+    private var storedCount: Int?
     
     override public func get(_ idx: Int, context: Any? = nil) -> Type? {
         if let obj = storage[idx] {
@@ -26,10 +28,26 @@ open class LazySeq<Type>: GeneratedSeq<Type> {
             self.storage[idx] = nil
         } else {
             self.storage = [:]
+            self.storedCount = nil
+        }
+    }
+    
+    public override var count: Int {
+        get {
+            if self.shouldStoreCount {
+                if let count = self.storedCount {
+                    return count
+                }
+                let count = super.count
+                self.storedCount = count
+                return count
+            }
+            return super.count
         }
     }
     
     public func applyChanges(deletions: [Int], insertions: [Int], updates: [Int], copyFn: ((_ fromIndex: Int, _ toIndex: Int, _ valueToCopy: Type) -> Type?) = { $2 }) {
+        self.storedCount = nil
         let deletionChanges = deletions.map { (idx) -> DividableRange<Int>.Divider in
             return DividableRange<Int>.Divider(idx: idx, changeRightFn: { (indexDelta) -> Int in
                 return indexDelta - 1

@@ -13,7 +13,7 @@ open class GeneratedSeq<Type>: Collection {
 
     // MARK:- main functional
     public func get(_ idx: Int, context: Any? = nil) -> Type? {
-        if countFn == nil || idx < countFn!() {
+        if countFn == nil || idx < self.count {
             return self.generateFn(idx, context)
         }
         return nil
