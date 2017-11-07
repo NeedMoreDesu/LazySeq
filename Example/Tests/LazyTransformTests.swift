@@ -33,6 +33,15 @@ class LazyTransformTests: QuickSpec {
                 transform.reset()
                 expect(transform.value()) == 4
             }
+            it("compares") {
+                cleanupState()
+                expect(transform.value() == 3) == true
+                a = [1, 2, 3, 4]
+                expect(transform.value() == 3) == true
+                transform.reset()
+                expect(transform.value() == 3) == false
+                expect(transform.value() == 4) == true
+            }
         }
     }
 }

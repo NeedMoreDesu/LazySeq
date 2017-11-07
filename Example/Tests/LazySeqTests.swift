@@ -14,7 +14,7 @@ import LazySeq
 
 class LazySeqTests: QuickSpec {
     override func spec() {
-        describe("LazySeq") {
+        describe("1d") {
             context("0..9") {
                 var numberOfGenerations = 0
                 let seq = LazySeq(count: { () -> Int in
@@ -186,6 +186,22 @@ class LazySeqTests: QuickSpec {
                     seq.applyChanges(deletions: [3], insertions: [6], updates: [0, 1, 2])
                     expect(seq.allObjects()) == [10, 20, 30, 5, 6, 60, 7, 8, 9, 10]
                 }
+            }
+        }
+        describe("2d") {
+            var arr = [[1, 2, 3], [4, 5], [6], [7, 8, 9]]
+            let seq = LazySeq(count: { () -> Int in
+                return arr.count
+            }, generate: { (section, _) -> LazySeq<Int> in
+                return LazySeq(count: { () -> Int in
+                    return arr[section].count
+                }, generate: { (row, _) -> Int in
+                    return arr[section][row]
+                })
+            })
+            
+            it("must be equal to the array underneath") {
+                expect(seq.equal2d(arr)) == true
             }
         }
     }
