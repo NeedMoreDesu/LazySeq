@@ -21,12 +21,12 @@ public func equalContents2d<Coll1, Coll2>(lhs: Coll1, rhs: Coll2) -> Bool where 
             return false
         }
         let leftItem = lhs[leftIndex]
-        leftIndex = lhs.index(after: leftIndex)
         let rightItem = rhs[rightIndex]
-        rightIndex = rhs.index(after: rightIndex)
         if (!equalContents1d(lhs: leftItem, rhs: rightItem)) {
             return false
         }
+        leftIndex = lhs.index(after: leftIndex)
+        rightIndex = rhs.index(after: rightIndex)
     }
 }
 
@@ -44,11 +44,11 @@ public func equalContents1d<Coll1, Coll2>(lhs: Coll1, rhs: Coll2) -> Bool where 
             return false
         }
         let leftItem = lhs[leftIndex]
-        leftIndex = lhs.index(after: leftIndex)
         let rightItem = rhs[rightIndex]
-        rightIndex = rhs.index(after: rightIndex)
         if (leftItem != rightItem) {
             return false
         }
+        leftIndex = lhs.index(after: leftIndex)
+        rightIndex = rhs.index(after: rightIndex)
     }
 }

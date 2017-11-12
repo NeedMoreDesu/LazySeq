@@ -36,6 +36,12 @@ open class GeneratedSeq<Type>: Collection {
         }
         return Array(self.makeIterator())
     }
+    
+    public func allObjects2d<ElementType>() -> [[ElementType]] where Type: Collection, Type.Element == ElementType {
+        return self.allObjects().map({ (coll) -> [ElementType] in
+            return Array(coll)
+        })
+    }
 
     // MARK:- collection stuff
     public func index(after i: Int) -> Int {
