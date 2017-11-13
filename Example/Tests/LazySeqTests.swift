@@ -169,6 +169,16 @@ class LazySeqTests: QuickSpec {
                     expect(seq.allObjects()) == [1, 9001, 2, 3, 4, 5, 6, 9002, 7, 8, 9, 10]
                 }
                 
+                it("apply insertion") {
+                    seq.resetStorage()
+                    arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    expect(seq.allObjects()) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    arr.append(20)
+                    arr.append(30)
+                    seq.applyChanges(deletions: [], insertions: [10, 11], updates: [])
+                    expect(seq.allObjects()) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30]
+                }
+                
                 it("apply update") {
                     seq.resetStorage()
                     arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

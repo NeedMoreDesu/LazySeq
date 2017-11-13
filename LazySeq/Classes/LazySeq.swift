@@ -46,16 +46,45 @@ open class LazySeq<Type>: GeneratedSeq<Type> {
         }
     }
     
+    func groupOperations(operations: [Int]) -> [(Int, Int)] {
+        var grouped: [(Int, Int)] = []
+        let sorted = operations.sorted()
+        var groupBeginning: Int?
+        var groupSize = 0
+        for idx in sorted {
+            if let beginning = groupBeginning {
+                if beginning+groupSize == idx {
+                    groupSize += 1
+                } else {
+                    grouped.append((beginning, groupSize))
+                    groupBeginning = idx
+                    groupSize = 1
+                }
+            } else {
+                groupBeginning = idx
+                groupSize = 1
+            }
+        }
+        if let beginning = groupBeginning {
+            grouped.append((beginning, groupSize))
+        }
+        return grouped
+    }
+    
     public func applyChanges(deletions: [Int], insertions: [Int], updates: [Int], copyFn: ((_ fromIndex: Int, _ toIndex: Int, _ valueToCopy: Type) -> Type?) = { $2 }) {
         self.storedCount = nil
-        let deletionChanges = deletions.map { (idx) -> DividableRange<Int>.Divider in
+        let groupedDeletions = self.groupOperations(operations: deletions)
+        let groupedInsertions = self.groupOperations(operations: insertions)
+        let deletionChanges = groupedDeletions.map { (arg0) -> DividableRange<Int>.Divider in
+            let (idx, size) = arg0
             return DividableRange<Int>.Divider(idx: idx, changeRightFn: { (indexDelta) -> Int in
-                return indexDelta - 1
+                return indexDelta - size
             })
         }
-        let insertionChanges = insertions.map { (idx) -> DividableRange<Int>.Divider in
+        let insertionChanges = groupedInsertions.map { (arg0) -> DividableRange<Int>.Divider in
+            let (idx, size) = arg0
             return DividableRange<Int>.Divider(idx: idx, changeRightFn: { (indexDelta) -> Int in
-                return indexDelta + 1
+                return indexDelta + size
             })
         }
         let changes = deletionChanges + insertionChanges
@@ -73,6 +102,9 @@ open class LazySeq<Type>: GeneratedSeq<Type> {
             if let val = val {
                 let indexDelta = DividableRange<Int>.binarySearch(idx: idx, ranges: ranges)
                 let toIndex = idx+indexDelta
+                if (toIndex >= self.count) {
+                    continue
+                }
                 let result = copyFn(idx, toIndex, val)
                 newStorage[toIndex] = result
             }
